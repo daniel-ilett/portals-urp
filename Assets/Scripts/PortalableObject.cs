@@ -42,7 +42,7 @@ public class PortalableObject : MonoBehaviour
             return;
         }
 
-        if(cloneObject.activeSelf && inPortal.IsPlaced() && outPortal.IsPlaced())
+        if(cloneObject.activeSelf && inPortal.IsPlaced && outPortal.IsPlaced)
         {
             var inTransform = inPortal.transform;
             var outTransform = outPortal.transform;

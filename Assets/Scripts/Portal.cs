@@ -17,17 +17,18 @@ public class Portal : MonoBehaviour
     [SerializeField]
     private LayerMask placementMask;
 
-    private bool isPlaced = true;
-    [SerializeField]
+    [SerializeField] private Transform testTransform;
+    
     private Collider wallCollider;
 
     private List<PortalableObject> portalObjects = new List<PortalableObject>();
+    public bool IsPlaced { get; private set; }
 
     private Material material;
     private new Renderer renderer;
     private new BoxCollider collider;
 
-    private void Awake()
+    private void OnEnable()
     {
         collider = GetComponent<BoxCollider>();
         renderer = GetComponent<Renderer>();
@@ -36,8 +37,9 @@ public class Portal : MonoBehaviour
 
     private void Start()
     {
-        PlacePortal(wallCollider, transform.position, transform.rotation);
+        //PlacePortal(wallCollider, transform.position, transform.rotation);
         SetColour(portalColour);
+        gameObject.SetActive(false);
     }
 
     private void Update()
@@ -107,18 +109,21 @@ public class Portal : MonoBehaviour
 
     public bool PlacePortal(Collider wallCollider, Vector3 pos, Quaternion rot)
     {
-        this.wallCollider = wallCollider;
-        transform.position = pos;
-        transform.rotation = rot;
-        transform.position -= transform.forward * 0.001f;
+        testTransform.position = pos;
+        testTransform.rotation = rot;
+        testTransform.position -= testTransform.forward * 0.001f;
 
         FixOverhangs();
         FixIntersects();
 
-
-
         if (CheckOverlap())
         {
+            this.wallCollider = wallCollider;
+            transform.position = testTransform.position;
+            transform.rotation = testTransform.rotation;
+
+            gameObject.SetActive(true);
+            IsPlaced = true;
             return true;
         }
 
@@ -147,8 +152,8 @@ public class Portal : MonoBehaviour
         for(int i = 0; i < 4; ++i)
         {
             RaycastHit hit;
-            Vector3 raycastPos = transform.TransformPoint(testPoints[i]);
-            Vector3 raycastDir = transform.TransformDirection(testDirs[i]);
+            Vector3 raycastPos = testTransform.TransformPoint(testPoints[i]);
+            Vector3 raycastDir = testTransform.TransformDirection(testDirs[i]);
 
             if(Physics.CheckSphere(raycastPos, 0.05f, placementMask))
             {
@@ -157,7 +162,7 @@ public class Portal : MonoBehaviour
             else if(Physics.Raycast(raycastPos, raycastDir, out hit, 2.1f, placementMask))
             {
                 var offset = hit.point - raycastPos;
-                transform.Translate(offset, Space.World);
+                testTransform.Translate(offset, Space.World);
             }
         }
     }
@@ -178,14 +183,14 @@ public class Portal : MonoBehaviour
         for (int i = 0; i < 4; ++i)
         {
             RaycastHit hit;
-            Vector3 raycastPos = transform.TransformPoint(0.0f, 0.0f, -0.1f);
-            Vector3 raycastDir = transform.TransformDirection(testDirs[i]);
+            Vector3 raycastPos = testTransform.TransformPoint(0.0f, 0.0f, -0.1f);
+            Vector3 raycastDir = testTransform.TransformDirection(testDirs[i]);
 
             if (Physics.Raycast(raycastPos, raycastDir, out hit, testDists[i], placementMask))
             {
                 var offset = (hit.point - raycastPos);
                 var newOffset = -raycastDir * (testDists[i] - offset.magnitude);
-                transform.Translate(newOffset, Space.World);
+                testTransform.Translate(newOffset, Space.World);
             }
         }
     }
@@ -193,23 +198,51 @@ public class Portal : MonoBehaviour
     // Once positioning has taken place, ensure the portal isn't intersecting anything.
     private bool CheckOverlap()
     {
-        var checkPosition = transform.position - new Vector3(0.0f, 0.0f, 0.1f);
         var checkExtents = new Vector3(0.9f, 1.9f, 0.05f);
-        if (Physics.CheckBox(checkPosition, checkExtents, transform.rotation, placementMask))
+
+        var checkPositions = new Vector3[]
+        {
+            testTransform.position + testTransform.TransformVector(new Vector3( 0.0f,  0.0f, -0.1f)),
+
+            testTransform.position + testTransform.TransformVector(new Vector3(-1.0f, -2.0f, -0.1f)),
+            testTransform.position + testTransform.TransformVector(new Vector3(-1.0f,  2.0f, -0.1f)),
+            testTransform.position + testTransform.TransformVector(new Vector3( 1.0f, -2.0f, -0.1f)),
+            testTransform.position + testTransform.TransformVector(new Vector3( 1.0f,  2.0f, -0.1f)),
+
+            testTransform.TransformVector(new Vector3(0.0f, 0.0f, 0.2f))
+        };
+
+        // Ensure the portal does not intersect walls.
+        var intersections = Physics.OverlapBox(checkPositions[0], checkExtents, testTransform.rotation, placementMask);
+
+        if(intersections.Length > 1)
         {
             return false;
         }
-        return true;
+        else if(intersections.Length == 1) 
+        {
+            // We are allowed to intersect the old portal position.
+            if (intersections[0] != collider)
+            {
+                return false;
+            }
+        }
+
+        // Ensure the portal corners overlap a surface.
+        bool isOverlapping = true;
+
+        for(int i = 1; i < checkPositions.Length - 1; ++i)
+        {
+            isOverlapping &= Physics.Linecast(checkPositions[i], 
+                checkPositions[i] + checkPositions[checkPositions.Length - 1], placementMask);
+        }
+
+        return isOverlapping;
     }
 
     public void RemovePortal()
     {
         gameObject.SetActive(false);
-        isPlaced = false;
-    }
-
-    public bool IsPlaced()
-    {
-        return isPlaced;
+        IsPlaced = false;
     }
 }
