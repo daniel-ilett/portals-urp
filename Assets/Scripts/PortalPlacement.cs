@@ -50,7 +50,7 @@ public class PortalPlacement : MonoBehaviour
                     return;
                 }
 
-                var outPortal = inPortal.GetOtherPortal();
+                var outPortal = inPortal.OtherPortal;
 
                 // Update position of raycast origin with small offset.
                 Vector3 relativePos = inPortal.transform.InverseTransformPoint(hit.point + dir);

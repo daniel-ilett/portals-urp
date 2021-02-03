@@ -325,12 +325,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5689706f89c34094ba5a773e254fe586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &1278150189527860038 stripped
-MeshCollider:
-  m_CorrespondingSourceObject: {fileID: 1278150189527860038, guid: 344fe101c0a2b4040983d49ec46050ec,
-    type: 3}
-  m_PrefabInstance: {fileID: 1500245544687086253}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1500245544687086253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -555,10 +549,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1197420493, guid: d66234c2b7828044d947dec754266dd0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1efb01fb612cc344eae3e8816eb53ad6, type: 2}
     - target: {fileID: 137260378139514096, guid: d66234c2b7828044d947dec754266dd0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -618,71 +608,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PortalPair
-      objectReference: {fileID: 0}
-    - target: {fileID: 8708287373399788272, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8708287373399788274, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f7d04dab3eb84fc4d84c446dac64de77, type: 2}
-    - target: {fileID: 8708287373399788276, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8708287373399788276, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 8708287373399788276, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8708287374288484307, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8708287374288484307, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8708287374288484307, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8708287374288484311, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9210734397624516433, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: wallCollider
-      value: 
-      objectReference: {fileID: 1278150189527860038}
-    - target: {fileID: 9210734397624516433, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: placementMask.m_Bits
-      value: 1536
-      objectReference: {fileID: 0}
-    - target: {fileID: 9210734398064362102, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: wallCollider
-      value: 
-      objectReference: {fileID: 1278150189527860038}
-    - target: {fileID: 9210734398064362102, guid: d66234c2b7828044d947dec754266dd0,
-        type: 3}
-      propertyPath: placementMask.m_Bits
-      value: 1536
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d66234c2b7828044d947dec754266dd0, type: 3}

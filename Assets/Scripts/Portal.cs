@@ -5,40 +5,39 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class Portal : MonoBehaviour
 {
-    [SerializeField]
-    private Portal otherPortal;
+    [field: SerializeField]
+    public Portal OtherPortal { get; private set; }
 
     [SerializeField]
     private Renderer outlineRenderer;
 
-    [SerializeField]
-    private Color portalColour;
+    [field: SerializeField]
+    public Color PortalColour { get; private set; }
 
     [SerializeField]
     private LayerMask placementMask;
 
-    [SerializeField] private Transform testTransform;
-    
-    private Collider wallCollider;
+    [SerializeField]
+    private Transform testTransform;
 
     private List<PortalableObject> portalObjects = new List<PortalableObject>();
-    public bool IsPlaced { get; private set; }
+    public bool IsPlaced { get; private set; } = false;
+    private Collider wallCollider;
 
-    private Material material;
-    private new Renderer renderer;
+    // Components.
+    public Renderer Renderer { get; private set; }
     private new BoxCollider collider;
 
-    private void OnEnable()
+    private void Awake()
     {
         collider = GetComponent<BoxCollider>();
-        renderer = GetComponent<Renderer>();
-        material = renderer.material;
+        Renderer = GetComponent<Renderer>();
     }
 
     private void Start()
     {
-        //PlacePortal(wallCollider, transform.position, transform.rotation);
-        SetColour(portalColour);
+        outlineRenderer.material.SetColor("_OutlineColour", PortalColour);
+        
         gameObject.SetActive(false);
     }
 
@@ -55,44 +54,13 @@ public class Portal : MonoBehaviour
         }
     }
 
-    public Portal GetOtherPortal()
-    {
-        return otherPortal;
-    }
-
-    public Color GetColour()
-    {
-        return portalColour;
-    }
-
-    public void SetColour(Color colour)
-    {
-        material.SetColor("_Colour", colour);
-        outlineRenderer.material.SetColor("_OutlineColour", colour);
-    }
-
-    public void SetMaskID(int id)
-    {
-        material.SetInt("_MaskID", id);
-    }
-
-    public void SetTexture(RenderTexture tex)
-    {
-        material.mainTexture = tex;
-    }
-
-    public bool IsRendererVisible()
-    {
-        return renderer.isVisible;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         var obj = other.GetComponent<PortalableObject>();
         if (obj != null)
         {
             portalObjects.Add(obj);
-            obj.SetIsInPortal(this, otherPortal, wallCollider);
+            obj.SetIsInPortal(this, OtherPortal, wallCollider);
         }
     }
 

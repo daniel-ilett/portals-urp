@@ -31,8 +31,8 @@ public class PortalCamera : MonoBehaviour
 
     private void Start()
     {
-        portals[0].SetTexture(tempTexture1);
-        portals[1].SetTexture(tempTexture2);
+        portals[0].Renderer.material.mainTexture = tempTexture1;
+        portals[1].Renderer.material.mainTexture = tempTexture2;
     }
 
     private void OnEnable()
@@ -52,7 +52,7 @@ public class PortalCamera : MonoBehaviour
             return;
         }
 
-        if (portals[0].IsRendererVisible())
+        if (portals[0].Renderer.isVisible)
         {
             portalCamera.targetTexture = tempTexture1;
             for (int i = iterations - 1; i >= 0; --i)
@@ -61,7 +61,7 @@ public class PortalCamera : MonoBehaviour
             }
         }
 
-        if(portals[1].IsRendererVisible())
+        if(portals[1].Renderer.isVisible)
         {
             portalCamera.targetTexture = tempTexture2;
             for (int i = iterations - 1; i >= 0; --i)

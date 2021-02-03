@@ -112,7 +112,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 1efb01fb612cc344eae3e8816eb53ad6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -399,7 +399,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8708287373399788272}
   m_LocalRotation: {x: -0, y: 0.000000014901161, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 8.5, z: 10}
+  m_LocalPosition: {x: 3, y: 3.5, z: 14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1197420492}
@@ -434,7 +434,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: f7d04dab3eb84fc4d84c446dac64de77, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -467,12 +467,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80c73be3fe0d35469084ced2f981279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherPortal: {fileID: 9210734398064362102}
+  <OtherPortal>k__BackingField: {fileID: 9210734398064362102}
   outlineRenderer: {fileID: 1197420493}
-  portalColour: {r: 1, g: 0.4, b: 0, a: 1}
+  <PortalColour>k__BackingField: {r: 1, g: 0.4447487, b: 0, a: 1}
   placementMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1536
   testTransform: {fileID: 1751038375405760789}
 --- !u!65 &2310442140362995724
 BoxCollider:
@@ -515,7 +515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8708287374288484311}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.00000032782552}
-  m_LocalPosition: {x: -2.0000005, y: 9, z: 0.00000027443326}
+  m_LocalPosition: {x: 9.25, y: 3.5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2067283979}
@@ -583,12 +583,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80c73be3fe0d35469084ced2f981279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherPortal: {fileID: 9210734397624516433}
+  <OtherPortal>k__BackingField: {fileID: 9210734397624516433}
   outlineRenderer: {fileID: 2067283980}
-  portalColour: {r: 0, g: 0.58431375, b: 1, a: 1}
+  <PortalColour>k__BackingField: {r: 0, g: 0.09055519, b: 1, a: 1}
   placementMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1536
   testTransform: {fileID: 8198509418328535693}
 --- !u!65 &2310442140013266219
 BoxCollider:
