@@ -43,6 +43,8 @@ public class Portal : MonoBehaviour
 
     private void Update()
     {
+        Renderer.enabled = OtherPortal.IsPlaced;
+
         for (int i = 0; i < portalObjects.Count; ++i)
         {
             Vector3 objPos = transform.InverseTransformPoint(portalObjects[i].transform.position);

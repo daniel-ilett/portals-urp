@@ -75,6 +75,17 @@ public class PortalableObject : MonoBehaviour
         ++inPortalCount;
     }
 
+    public void ExitPortal(Collider wallCollider)
+    {
+        Physics.IgnoreCollision(collider, wallCollider, false);
+        --inPortalCount;
+
+        if (inPortalCount == 0)
+        {
+            cloneObject.SetActive(false);
+        }
+    }
+
     public virtual void Warp()
     {
         var inTransform = inPortal.transform;
@@ -99,16 +110,5 @@ public class PortalableObject : MonoBehaviour
         var tmp = inPortal;
         inPortal = outPortal;
         outPortal = tmp;
-    }
-
-    public void ExitPortal(Collider wallCollider)
-    {
-        Physics.IgnoreCollision(collider, wallCollider, false);
-        --inPortalCount;
-
-        if (inPortalCount == 0)
-        {
-            cloneObject.SetActive(false);
-        }
     }
 }

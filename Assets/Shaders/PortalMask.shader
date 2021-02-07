@@ -20,7 +20,6 @@
         Pass
         {
 			Name "Mask"
-			Tags { "LightMode" = "UniversalForward" }
 
 			Stencil
 			{
