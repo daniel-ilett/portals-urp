@@ -70,7 +70,7 @@ public class PortalableObject : MonoBehaviour
 
         Physics.IgnoreCollision(collider, wallCollider);
 
-        cloneObject.SetActive(false);
+        cloneObject.SetActive(true);
 
         ++inPortalCount;
     }
