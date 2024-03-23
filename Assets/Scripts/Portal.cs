@@ -58,22 +58,26 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var obj = other.GetComponent<PortalableObject>();
-        if (obj != null)
-        {
-            portalObjects.Add(obj);
-            obj.SetIsInPortal(this, OtherPortal, wallCollider);
+        if (OtherPortal.IsPlaced) {
+            var obj = other.GetComponent<PortalableObject>();
+            if (obj != null)
+            {
+                portalObjects.Add(obj);
+                obj.SetIsInPortal(this, OtherPortal, wallCollider);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        var obj = other.GetComponent<PortalableObject>();
+        if (OtherPortal.IsPlaced) {
+            var obj = other.GetComponent<PortalableObject>();
 
-        if(portalObjects.Contains(obj))
-        {
-            portalObjects.Remove(obj);
-            obj.ExitPortal(wallCollider);
+            if(portalObjects.Contains(obj))
+            {
+                portalObjects.Remove(obj);
+                obj.ExitPortal(wallCollider);
+            }
         }
     }
 
